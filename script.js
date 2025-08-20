@@ -7,7 +7,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 // Chargement du fichier GeoJSON des pays
-fetch('countries1.geojson')
+fetch('countries.geojson')
   .then(response => response.json())
   .then(data => {
     L.geoJSON(data, {
