@@ -1,5 +1,5 @@
 // Initialisation de la carte centrée sur Marseille
-const map = L.map('map').setView([43.2965, 5.3698], 13);
+const map = L.map('map').setView([20, 0], 2);
 
 // Ajout du fond de carte OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
