@@ -45,6 +45,3 @@ function onCountryClick(feature, layer) {
       });
   });
 }
-
-console.log("Chargement du fichier GeoJSON...");
-
