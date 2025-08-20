@@ -1,11 +1,12 @@
 // Initialisation de la carte centrée sur Marseille
-const map = L.map('map').setView([20, 0], 2);
+const map = L.map('map').setView([43.2965, 5.3698], 13);
 
 // Ajout du fond de carte OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: '© OpenStreetMap contributors'
 }).addTo(map);
 
+// Chargement du fichier GeoJSON
 fetch('countries.geojson')
   .then(response => response.json())
   .then(data => {
@@ -14,12 +15,18 @@ fetch('countries.geojson')
     }).addTo(map);
   });
 
+// Fonction appelée lors du clic sur un pays
 function onCountryClick(feature, layer) {
   layer.on('click', () => {
-    const countryName = feature.properties.ADMIN || 'Pays inconnu';
-    
-    // Appel à une API pour récupérer les infos détaillées
-    fetch(`https://restcountries.com/v3.1/name/${countryName}`)
+    const isoCode = feature.properties.ISO_A3 || null;
+
+    if (!isoCode) {
+      layer.bindPopup('Code ISO non disponible pour ce pays.').openPopup();
+      return;
+    }
+
+    // Appel à l’API avec le code ISO
+    fetch(`https://restcountries.com/v3.1/alpha/${isoCode}`)
       .then(res => res.json())
       .then(info => {
         const country = info[0];
@@ -37,6 +44,9 @@ function onCountryClick(feature, layer) {
           IDH : (à intégrer via autre source)
         `;
         layer.bindPopup(popupContent).openPopup();
+      })
+      .catch(() => {
+        layer.bindPopup('Informations non disponibles pour ce pays.').openPopup();
       });
   });
 }
