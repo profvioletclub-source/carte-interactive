@@ -26,17 +26,17 @@ function onCountryClick(feature, layer) {
       .then(info => {
         const country = info[0];
         const popupContent = `
-          🇺🇳 <strong>${country.name.official}</strong><br>
-          🏳️ <img src="${country.flags.svg}" width="50"><br>
-          🧑‍⚖️ Chef d’État : ${country.headOfState || 'N/A'}<br>
-          👥 Population : ${country.population.toLocaleString()}<br>
-          🌍 Superficie : ${country.area.toLocaleString()} km²<br>
-          🏛️ Organisations : ONU, UNESCO, OMS (à compléter)<br>
-          📍 Capitale : ${country.capital}<br>
-          🗣️ Langue(s) : ${Object.values(country.languages).join(', ')}<br>
-          💰 Monnaie : ${Object.values(country.currencies)[0].name}<br>
-          📈 PIB : (à intégrer via autre API)<br>
-          📊 IDH : (à intégrer via autre source)
+          <strong>${country.name.official}</strong><br>
+          <img src="${country.flags.svg}" width="50"><br>
+          Chef d’État : ${country.headOfState || 'N/A'}<br>
+          Population : ${country.population.toLocaleString()}<br>
+          Superficie : ${country.area.toLocaleString()} km²<br>
+          Organisations : ONU, UNESCO, OMS (à compléter)<br>
+          Capitale : ${country.capital}<br>
+          Langue(s) : ${Object.values(country.languages).join(', ')}<br>
+          Monnaie : ${Object.values(country.currencies)[0].name}<br>
+          PIB : (à intégrer via autre API)<br>
+          IDH : (à intégrer via autre source)
         `;
         layer.bindPopup(popupContent).openPopup();
       })
